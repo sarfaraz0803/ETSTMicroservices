@@ -11,7 +11,7 @@ import javax.validation.Valid
 
 
 
-@FeignClient(url="http://employeeaccountservice-env.eba-gwtwmq6p.us-east-1.elasticbeanstalk.com/account", name="managerClient")
+@FeignClient(url="http://localhost:8762/account", name="managerClient")
 interface ManagerClient {
 
     @PostMapping("/addAccount")
