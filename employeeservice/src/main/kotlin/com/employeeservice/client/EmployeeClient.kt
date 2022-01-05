@@ -11,7 +11,7 @@ import java.time.LocalDate
 import javax.validation.Valid
 
 
-@FeignClient(url="http://localhost:8762/account", name="employeeClient")
+@FeignClient(url="http://employeeaccountservice-env.eba-gwtwmq6p.us-east-1.elasticbeanstalk.com/account", name="employeeClient")
 interface EmployeeClient {
 
     @GetMapping("/getAccountById/{id}")

@@ -27,7 +27,7 @@ import javax.ws.rs.core.MultivaluedMap
 
 @RestController
 @RequestMapping("/employeeProfile")
-@CrossOrigin
+@CrossOrigin(origins = ["*"])
 class EmpProfileController {
 
     @Autowired

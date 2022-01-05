@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 
 
-@FeignClient(url="http://localhost:8763/employeeProfile",name="accountClient")
+@FeignClient(url="http://employee-env.eba-bmwashtr.us-east-1.elasticbeanstalk.com/employeeProfile",name="accountClient")
 interface AccountClient {
 
     @GetMapping("/checkEmp/{id}/{username}")

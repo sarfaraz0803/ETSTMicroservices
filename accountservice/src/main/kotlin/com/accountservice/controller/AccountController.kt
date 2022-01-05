@@ -20,8 +20,8 @@ import javax.validation.Valid
 
 
 @RestController
-@RequestMapping("account")
-@CrossOrigin("http://localhost:3000/")
+@RequestMapping("/account")
+@CrossOrigin(origins = ["*"])
 class AccountController {
 
     @Autowired
@@ -94,7 +94,7 @@ class AccountController {
     }
 
     @GetMapping("/getOneEmpTask")
-    fun getOneEmpTask(@RequestBody taskDto: TaskDto ):ResponseEntity<Any>{
+    fun getOneEmpTask(@RequestBody taskDto: TaskDto):ResponseEntity<Any>{
         return ResponseEntity(accountServiceImpl.getOneEmpTask(taskDto),HttpStatus.OK)
     }
 

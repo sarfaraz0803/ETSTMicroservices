@@ -25,7 +25,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/manager")
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin(origins = ["*"])
 class ManagerController {
 
     @Autowired
@@ -394,6 +394,30 @@ class ManagerController {
             return ResponseEntity("Need To Login!! UserId Not Exist",HttpStatus.OK)
         }
         return ResponseEntity("Unauthorized!!! Please provide token & userId",HttpStatus.UNAUTHORIZED)
+    }
+
+    @GetMapping("/getTask")
+    fun getOneEmpTask(request: HttpServletRequest,@RequestBody taskDto: TaskDto):ResponseEntity<Any>{
+        val userId = request.getHeader("UserId")
+        val token = request.getHeader("Authorization")
+        if(token != null && userId != null){
+            if(iJwtCreDao.existsById(userId)){
+                try {
+                    val result = jwtTokenValidation.validateUserToken(userId, token)
+                    if( result == true){
+                        return ResponseEntity(managerClient.getOneEmpTask(taskDto),HttpStatus.OK)
+                    }
+                    return ResponseEntity("Credentials Not Matching",HttpStatus.OK)
+                }catch (e:ExpiredJwtException){
+                    jwtTokenValidation.deleteJwtCre(token)
+                    return ResponseEntity("Token Expire!!! Please Login Again",HttpStatus.OK)
+                }catch (e:Exception){
+                    return ResponseEntity(e.message,HttpStatus.OK)
+                }
+            }
+            return ResponseEntity("Need To Login!! UserId Not Exist",HttpStatus.OK)
+        }
+        return ResponseEntity("Please provide token & userId",HttpStatus.OK)
     }
 
 

@@ -20,7 +20,7 @@ class MangerserviceApplicationTests {
 
 	@Test
 	fun registerManagerTest(){
-		val newManager = ManagerAuth(_id = null, username = "Bobby@gmail.com", name = "Bobby", email = "Bobby@gmail.com", password = "Bobbynull")
+		val newManager = ManagerAuth(username = "Bobby@gmail.com", name = "Bobby", email = "Bobby@gmail.com", password = "Bobbynull")
 		//println(newManager)
 		given(iManagerDao.save(newManager)).willReturn(newManager)
 		assert(managerServiceImpl.registerManager(newManager) == newManager)
